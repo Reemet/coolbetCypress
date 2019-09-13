@@ -1,0 +1,18 @@
+{
+    "projectId": "coolbet",
+    "viewportWidth": 1280,
+    "viewportHeight": 720,
+    "taskTimeout": 35000,
+    "ignoreTestFiles": "e2e/status/401.spec.js",
+
+    "env": {  
+        "url": "https://www.coolbetstage.com",
+        "default.email": "reemetz@gmail.com",
+        "swedish.email": "swe_cool@coolbet.com",
+        "finnish.email": "fin_cool@coolbet.com",
+
+        "default.password": "",
+
+        "default.name": "Reemet"
+    }
+}
