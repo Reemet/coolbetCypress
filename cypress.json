@@ -7,11 +7,15 @@
 
     "env": {  
         "url": "https://www.coolbetstage.com",
+        "poker.url": "https://coolbetstage.com/en/poker/login?lang=",
         "default.email": "reemetz@gmail.com",
-        "swedish.email": "swe_cool@coolbet.com",
-        "finnish.email": "fin_cool@coolbet.com",
-
+        "swedish.email": "cool_swe@coolbet.com",
+        "finnish.email": "cool_fin@coolbet.com",
+        "norway.email": "cool_nor@coolbet.com",
+        "estonia.email": "cool_est@coolbet.com",
+        
         "default.password": "",
+        "cool.password": "",
 
         "default.name": "Reemet"
     }
