@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "./node_modules/.bin/cypress open",
     "cypress:run": "./node_modules/.bin/cypress run",
-    "cypress:runPoker": "./node_modules/.bin/cypress run --spec 'cypress/integration/e2e/poker_login.spec.js'"
+    "cypress:runPoker": "./node_modules/.bin/cypress run --spec 'cypress/integration/e2e/poker_login.spec.js'",
+    "cypress:runRegistration": "./node_modules/.bin/cypress run --spec 'cypress/integration/e2e/registration.spec.js'"
   },
   "author": "",
   "license": "ISC",
