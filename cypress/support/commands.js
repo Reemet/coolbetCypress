@@ -35,9 +35,21 @@ const countryCodes =  {
 }
 
 Cypress.Commands.add("login", ( email, password ) => { 
-        cy.get('input[type=email]').type(email);
-        cy.get('input[type=password]').type(password);
-        cy.get('button[type=submit]').click();
+    cy.url().then( ($url) => {
+        const $countryCode = $url.split('/')[3];
+
+        cy.fixture($countryCode).then(($json) => {
+            cy.get('button').contains($json['ui.header.login']).click();
+
+            cy.get('.login-form').should('be.visible');
+            cy.get('span').should('contain', `${$json['ui.registration.welcome-back']}`);
+            cy.get('input[type=email]').type(email);
+            cy.get('input[type=password]').type(password);
+
+            cy.get('button[type=submit]').click();
+            
+        })
+    });
  });
 
  Cypress.Commands.add("submit", () => {
@@ -100,9 +112,17 @@ Cypress.Commands.add('navigateTo', (element) => {
  });
 
  Cypress.Commands.add('logOut', () => {
-   //  cy.get('button').trigger('mouseover');
-  
-    // cy.get('.account-button-dropdown-container').trigger('mouseover') //.contains('Logi välja').click( { force: true });
+    cy.url().then( ($url) => {
+        const $el = $url.split('/')[3];
+
+         cy.fixture($el).then( ($json) => {
+            cy.get('.account-button').click();
+            cy.get('h2').contains(`${$json['ui.header.my-account']}`).should('be.visible');
+            cy.get('.account-menu-list').should('be.visible');
+            const logout = $json['ui.account.logout'];
+            cy.get('button > span').contains(logout).click();
+          })
+     });     
  });
 
 Cypress.Commands.add('selectCountry', (code) => {
@@ -179,6 +199,11 @@ Cypress.Commands.add('checkRegistrationModal', () => {
         
     });
 });
+Cypress.Commands.add('expectSwedishButtons', () => {
+    cy.get('button').contains('Spelgränser').should('be.visible');
+    cy.get('button').contains('Spelpaus').should('be.visible');
+    cy.get('button').contains('Självtest').should('be.visible');
+});
 Cypress.Commands.add('expectRegistrationROWError', () => {
     cy.url().then( ($url) => {
         const $countryCode = $url.split('/')[3];
@@ -223,6 +248,17 @@ Cypress.Commands.add('welcomePageShouldBeVisible', () => {
 });
 Cypress.Commands.add('changeLanguage', (selection) => {
     cy.get('.ui-language-select-mini-board-language-text').contains(selection).click({ force: true });
+});
+Cypress.Commands.add('openDepositPlay', function () {
+    cy.url().then( ($url) => {
+        const $countryCode = $url.split('/')[3];
+        console.log(cy.fixture($countryCode));
+        cy.fixture(`${$countryCode}.json`).then(($json) => {
+             cy.get('button').should('contain', 'Deposit & Play').click();
+            // -- replace once translation is not hard coded  ---
+            // cy.get('button').contains($json['ui.pay-and-play.deposit---play']);
+        })
+    });
 });
 
 //

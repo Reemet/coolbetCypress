@@ -4,15 +4,32 @@
   "description": "coolbet Cypress e2e tests",
   "main": "index.js",
   "scripts": {
+    "fetch-translations": "node -r esm ./cypress/support/fetch-translations",
+    "fetch-committer": "node -r esm ./cypress/support/fetch-committer",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "./node_modules/.bin/cypress open",
-    "cypress:run": "./node_modules/.bin/cypress run",
-    "cypress:runPoker": "./node_modules/.bin/cypress run --spec 'cypress/integration/e2e/poker_login.spec.js'",
+    "cypress:run": "./node_modules/.bin/cypress run --browser chrome",
+    "cypress:ci": "concurrently \"cypress run --browser chrome\" --kill-others",
+    "cypress:runLogin": "./node_modules/.bin/cypress run --browser chrome --spec 'cypress/integration/e2e/login.spec.js' --reporter mocha-jenkins-reporter",
     "cypress:runRegistration": "./node_modules/.bin/cypress run --spec 'cypress/integration/e2e/registration.spec.js'"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^3.4.1"
+    "concurrently": "^4.1.2",
+    "cypress": "^3.4.1",
+    "mocha": "^6.2.1",
+    "mocha-junit-reporter": "^1.23.1",
+    "mocha-multi-reporters": "^1.1.7"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.15",
+    "mocha-jenkins-reporter": "^0.4.2",
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   }
 }
